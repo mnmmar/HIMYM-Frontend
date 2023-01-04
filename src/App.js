@@ -8,13 +8,15 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
+const client = axios.create({ baseURL: 'https://serene-tundra-26070.herokuapp.com/api' })
+
 const App = () => {
 
   let [cast, setCast] = useState([])
 
   const getCast = () => {
-    axios
-      .get('http://localhost:8000/api/cast')
+    client
+      .get('/cast')
       .then(
         (response) => setCast(response.data),
         (err) => console.log(err)
@@ -22,8 +24,8 @@ const App = () => {
   }
 
   const handleCreate = (addPerson) => {
-    axios
-      .post('http://localhost:8000/api/cast', addPerson)
+    client
+      .post('/cast', addPerson)
       .then((response) => {
         console.log(response)
         getCast()
@@ -31,16 +33,16 @@ const App = () => {
   }
 
   const handleDelete = (event) => {
-    axios
-      .delete('http://localhost:8000/api/cast/' + event.target.value)
+    client
+      .delete('/cast/' + event.target.value)
       .then((response) => {
         getCast()
       })
   }
 
   const handleUpdate = (editPerson) => {
-    axios
-      .put('http://localhost:8000/api/cast/' + editPerson.id, editPerson)
+    client
+      .put('/cast/' + editPerson.id, editPerson)
       .then((response) => {
         getCast()
       })
