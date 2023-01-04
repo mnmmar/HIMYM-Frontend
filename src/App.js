@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import Add from './compenents/Add';
-import Edit from './compenents/Edit';
-import Show from './compenents/Show';
+import Add from './components/Add';
+import Edit from './components/Edit';
+import Show from './components/Show';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
