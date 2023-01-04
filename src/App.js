@@ -4,11 +4,17 @@ import './App.css';
 import Add from './components/Add';
 import Edit from './components/Edit';
 import Show from './components/Show';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import { AppBar, Box, Container, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton, Toolbar, Typography } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+
 
 // const axios = axios.create({ baseURL: 'https://serene-tundra-26070.herokuapp.com/api' })
+const drawerWidth = 240;
+
+//FROM MUI DOCS https://mui.com/material-ui/react-drawer/#full-height-navigation
+
 
 const App = () => {
 
@@ -51,12 +57,55 @@ const App = () => {
   useEffect(() => {
     getCast()
   }, [])
+  //MUI THEMES
+
 
   return (
     <>
-      <Add handleCreate={handleCreate}></Add>
-      <div>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+          <Toolbar>
+            <Typography variant="h3" noWrap component="div">
+              How I Met Your Mother
+            </Typography>
+            <Typography variant="h6" sx={{ p: 3 }}>All the details you never needed</Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+          }}
+        >
+          <Toolbar />
+          <Box sx={{ overflow: 'auto', m: 4 }}>
+            <List>
+              {['Episodes', 'Characters', 'Forum'].map((text, index) => (
+                <ListItem key={text} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+            <Divider />
+          </Box>
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Toolbar />
 
+          <Add handleCreate={handleCreate}></Add>
+
+        </Box>
+      </Box>
+
+      <div>
 
         {cast.map((person) => {
           return (
@@ -69,6 +118,7 @@ const App = () => {
             </div>
           )
         })}
+
         <Box component="footer"
           sx={{
             py: 3, px: 2, mt: 'auto',
