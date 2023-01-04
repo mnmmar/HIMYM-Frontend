@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 
+
 const Add = (props) => {
   let emptyPerson = { name: '', age: '', first_episode: '', status: '', relationship_status: '', image_link: '' }
   const [person, setPerson] = useState(emptyPerson)
