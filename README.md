@@ -73,5 +73,5 @@ To redeploy from Netlify, in the terminal run
 ```
 npm run build
 
-sudo netlify deploy
+sudo netlify deploy --prod
 ```
