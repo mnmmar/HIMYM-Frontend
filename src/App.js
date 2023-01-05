@@ -179,20 +179,22 @@ const App = () => {
 
           {showBlog ? <>
             <Add handleCreate={handleCreate}></Add>
-            <Grid>
+            <Grid container>
               {blog.map((comment, index) => {
                 return (
-                  <Card>
-                    <CardMedia component="img" height="100" image={comment.image} />
-                    <CardContent>
-                      <Typography>
-                        Name: {comment.name}
-                        Topic: {comment.topic}
-                        Image Link: {comment.image_link}
-                        Comment: {comment.post}
-                      </Typography>
-                    </CardContent>
-                  </Card>
+                  <Grid key={comment._id}>
+                    <Card>
+                      <CardMedia component="img" height="100" image={comment.image} />
+                      <CardContent>
+                        <Typography>
+                          Name: {comment.name}
+                          Topic: {comment.topic}
+                          Image Link: {comment.image_link}
+                          Comment: {comment.post}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
                 )
               })}
 
