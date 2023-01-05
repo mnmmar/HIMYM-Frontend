@@ -6,15 +6,11 @@ import Edit from './components/Edit';
 import Show from './components/Show';
 import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton, Toolbar, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-
 
 // const axios = axios.create({ baseURL: 'https://serene-tundra-26070.herokuapp.com/api' })
 const drawerWidth = 240;
 
 //FROM MUI DOCS https://mui.com/material-ui/react-drawer/#full-height-navigation
-
 
 const App = () => {
 
@@ -168,8 +164,6 @@ const App = () => {
               )}
             </Grid>
           </> : <></>}
-
-
 
         </Box>
       </Box>
