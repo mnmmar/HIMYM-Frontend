@@ -8,6 +8,7 @@ import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawe
 import CssBaseline from '@mui/material/CssBaseline';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import CardMedia from '@mui/material/CardMedia';
 
 
 // const axios = axios.create({ baseURL: 'https://serene-tundra-26070.herokuapp.com/api' })
@@ -62,6 +63,7 @@ const App = () => {
   const [showEpisodes, setShowEpisodes] = useState(true)
   const [showCast, setShowCast] = useState(false)
 
+
   const episodeVisibility = () => {
     setShowCast(false)
     setShowEpisodes(true)
@@ -99,9 +101,6 @@ const App = () => {
 
   return (
     <>
-
-      <Add handleCreate={handleCreate}></Add>
-      <div>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
@@ -147,6 +146,11 @@ const App = () => {
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography sx={{ mb: 2 }}>Season: {episode.season} Episode: {episode.number}</Typography>
                         <Typography sx={{ mb: 2 }}>Name: {episode.name}</Typography>
+
+                        <Typography sx={{ mb: 2 }}>Air Date: {episode.airdate}</Typography>
+                        <CardMedia component="img" height="100" image={episode.image.medium} />
+
+
                       </CardContent>
                     </Card>
                   </Grid>
