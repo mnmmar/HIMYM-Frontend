@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import Add from './components/Add';
-import Edit from './components/Edit';
-import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton, Toolbar, Typography } from '@mui/material';
+import EditModal from './components/EditModal';
+import { AppBar, Button, Modal, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton, Toolbar, Typography, CardActions } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import CardMedia from '@mui/material/CardMedia';
 
@@ -11,12 +11,21 @@ import CardMedia from '@mui/material/CardMedia';
 // const axios = axios.create({ baseURL: 'https://serene-tundra-26070.herokuapp.com/api' })
 const drawerWidth = 240;
 
-//FROM MUI DOCS https://mui.com/material-ui/react-drawer/#full-height-navigation
-
 const App = () => {
 
   let [blog, setBlog] = useState([])
   const [cast, setCast] = useState([])
+
+  //---------
+  //EDIT Modal
+  //----------
+  const [showModal, setShowModal] = useState(false)
+  const [blogEditItem, setBlogItem] = useState({})
+
+  const editBlog = (blogItem) => (event) => {
+    setShowModal(true)
+    setBlogItem(blogItem)
+  }
 
   const getBlog = () => {
     axios
@@ -44,9 +53,9 @@ const App = () => {
       })
   }
 
-  const handleUpdate = (editPerson) => {
+  const handleUpdate = (editBlog) => {
     axios
-      .put('https://powerful-savannah-49295.herokuapp.com/api/blog/' + editPerson.id, editPerson)
+      .put('https://powerful-savannah-49295.herokuapp.com/api/blog/' + editBlog.id, editBlog)
       .then((response) => {
         getBlog()
       })
@@ -93,6 +102,7 @@ const App = () => {
   useEffect(() => {
     getCast()
     getEpisodes()
+    getBlog()
   }, [])
   //MUI THEMES
 
@@ -182,17 +192,17 @@ const App = () => {
             <Grid container>
               {blog.map((comment, index) => {
                 return (
-                  <Grid key={comment._id}>
-                    <Card>
-                      <CardMedia component="img" height="100" image={comment.image} />
-                      <CardContent>
-                        <Typography>
-                          Name: {comment.name}
-                          Topic: {comment.topic}
-                          Image Link: {comment.image_link}
-                          Comment: {comment.post}
-                        </Typography>
+                  <Grid item xs={12} key={comment._id}>
+                    <Card elevation={6}>
+                      <CardContent align="left">
+                        <Typography >Name: {comment.name}</Typography>
+                        <Typography> Topic: {comment.topic}</Typography>
+                        <Typography>Comment: {comment.post}</Typography>
                       </CardContent>
+                      <CardActions>
+                        <Button size="small" onClick={editBlog(comment)}>Edit</Button>
+
+                      </CardActions>
                     </Card>
                   </Grid>
                 )
@@ -201,27 +211,32 @@ const App = () => {
             </Grid>
           </> : <></>}
 
+          <EditModal open={showModal}
+            onClose={() => { setShowModal(false) }}
+            blog={blogEditItem}
+            onDelete={handleDelete}
+            onSubmit={handleUpdate} />
 
         </Box>
       </Box>
 
-      <div>
 
-        <Box component="footer"
-          sx={{
-            py: 3, px: 2, mt: 'auto',
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[400]
-                : theme.palette.grey[800],
-          }}>
-          <Container maxWidth="sm">
-            <Typography variant="body1">
-              Brought to you by A.Capace, M.Steinberg, M.M.Min
-            </Typography>
-          </Container>
-        </Box>
-      </div>
+
+      <Box component="footer"
+        sx={{
+          py: 3, px: 2, mt: 'auto',
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light'
+              ? theme.palette.grey[400]
+              : theme.palette.grey[800],
+        }}>
+        <Container maxWidth="sm">
+          <Typography variant="body1">
+            Brought to you by A.Capace, M.Steinberg, M.M.Min
+          </Typography>
+        </Container>
+      </Box>
+
     </>
   )
 }
