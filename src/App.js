@@ -17,6 +17,7 @@ const App = () => {
 
   let [blog, setBlog] = useState([])
   const [cast, setCast] = useState([])
+
   const getBlog = () => {
     axios
       .get('https://serene-tundra-26070.herokuapp.com/api/blog')
@@ -74,27 +75,24 @@ const App = () => {
     setShowEpisodes(false)
     setShowBlog(true)
   }
-  // const getEpisodes = (event) => {
-  //   event.preventDefault()
-  //   axios
-  //     .get('https://api.tvmaze.com/shows/171/episodes')
-  //     .then((response) => {
-  //       setEpisodes(response.data)
-  //     })
-  // }
-  const getCast = () => {
-    axios
-      .get('https:api.tvmaze.com/shows/171/cast')
-      .then((response) => { setCast(response.data) })
-  }
-
-  useEffect(() => {
-    getCast()
+  const getEpisodes = () => {
     axios
       .get('https://api.tvmaze.com/shows/171/episodes')
       .then((response) => {
         setEpisodes(response.data)
       })
+  }
+  const getCast = () => {
+    axios
+      .get('https:api.tvmaze.com/shows/171/cast')
+      .then((response) => {
+        setCast(response.data)
+      })
+  }
+
+  useEffect(() => {
+    getCast()
+    getEpisodes()
   }, [])
   //MUI THEMES
 
