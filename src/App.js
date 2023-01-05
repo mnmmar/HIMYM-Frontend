@@ -6,11 +6,17 @@ import Edit from './components/Edit';
 import Show from './components/Show';
 import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton, Toolbar, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import CardMedia from '@mui/material/CardMedia';
+
 
 // const axios = axios.create({ baseURL: 'https://serene-tundra-26070.herokuapp.com/api' })
 const drawerWidth = 240;
 
 //FROM MUI DOCS https://mui.com/material-ui/react-drawer/#full-height-navigation
+
+
+
+
 
 const App = () => {
 
@@ -54,6 +60,7 @@ const App = () => {
 
   const [showEpisodes, setShowEpisodes] = useState(true)
   const [showCast, setShowCast] = useState(false)
+
 
   const episodeVisibility = () => {
     setShowCast(false)
@@ -137,6 +144,11 @@ const App = () => {
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography sx={{ mb: 2 }}>Season: {episode.season} Episode: {episode.number}</Typography>
                         <Typography sx={{ mb: 2 }}>Name: {episode.name}</Typography>
+
+                        <Typography sx={{ mb: 2 }}>Air Date: {episode.airdate}</Typography>
+                        <CardMedia component="img" height="100" image={episode.image.medium} />
+
+
                       </CardContent>
                     </Card>
                   </Grid>
