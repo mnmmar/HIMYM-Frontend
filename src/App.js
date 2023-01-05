@@ -62,7 +62,7 @@ const App = () => {
 
   const [showEpisodes, setShowEpisodes] = useState(true)
   const [showCast, setShowCast] = useState(false)
-  // const [showImage, setShowImage] = useState(true)
+
 
   const episodeVisibility = () => {
     setShowCast(false)
@@ -146,8 +146,10 @@ const App = () => {
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography sx={{ mb: 2 }}>Season: {episode.season} Episode: {episode.number}</Typography>
                         <Typography sx={{ mb: 2 }}>Name: {episode.name}</Typography>
+
                         <Typography sx={{ mb: 2 }}>Air Date: {episode.airdate}</Typography>
                         <CardMedia component="img" height="100" image={episode.image.medium} />
+
 
                       </CardContent>
                     </Card>
