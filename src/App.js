@@ -84,7 +84,7 @@ const App = () => {
   }
   const getCast = () => {
     axios
-      .get('https:api.tvmaze.com/shows/171/cast')
+      .get('https://api.tvmaze.com/shows/171/cast')
       .then((response) => {
         setCast(response.data)
       })
