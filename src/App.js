@@ -4,10 +4,11 @@ import './App.css';
 import Add from './components/Add';
 import Edit from './components/Edit';
 import Show from './components/Show';
-import { AppBar, Box, Container, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton, Toolbar, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import CardMedia from '@mui/material/CardMedia';
 
 
 // const axios = axios.create({ baseURL: 'https://serene-tundra-26070.herokuapp.com/api' })
@@ -23,7 +24,7 @@ const App = () => {
 
   let [cast, setCast] = useState([])
 
-  const getCast = () => {
+  const getComments = () => {
     axios
       .get('https://serene-tundra-26070.herokuapp.com/api/cast')
       .then(
@@ -57,8 +58,43 @@ const App = () => {
       })
   }
 
+  const [episodes, setEpisodes] = useState([])
+
+  const [showEpisodes, setShowEpisodes] = useState(true)
+  const [showCast, setShowCast] = useState(false)
+  // const [showImage, setShowImage] = useState(true)
+
+  const episodeVisibility = () => {
+    setShowCast(false)
+    setShowEpisodes(true)
+  }
+
+  const castVisibility = () => {
+    setShowCast(true)
+    setShowEpisodes(false)
+  }
+  // const getEpisodes = (event) => {
+  //   event.preventDefault()
+  //   axios
+  //     .get('https://api.tvmaze.com/shows/171/episodes')
+  //     .then((response) => {
+  //       setEpisodes(response.data)
+  //     })
+  // }
+  const getCast = () => {
+    axios
+      .get('https:api.tvmaze.com/shows/171/cast')
+      .then((response) => { setCast(response.data) })
+  }
+
   useEffect(() => {
     getCast()
+
+    axios
+      .get('https://api.tvmaze.com/shows/171/episodes')
+      .then((response) => {
+        setEpisodes(response.data)
+      })
   }, [])
   //MUI THEMES
 
@@ -84,18 +120,13 @@ const App = () => {
           }}
         >
           <Toolbar />
+
           <Box sx={{ overflow: 'auto', m: 4 }}>
             <List>
-              {['Episodes', 'Characters', 'Forum'].map((text, index) => (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
+              <Button variant={showEpisodes ? "contained" : "outlined"} onClick={episodeVisibility}>Episodes</Button>
+
+              <Button variant={showCast ? "contained" : "outlined"} onClick={castVisibility}>Cast</Button>
+
             </List>
             <Divider />
           </Box>
@@ -105,22 +136,53 @@ const App = () => {
 
           <Add handleCreate={handleCreate}></Add>
 
+          {showEpisodes ? <>
+            <Grid container sx={{ my: 4 }} spacing={4}>
+              {episodes.map((episode, index) => {
+                return (
+
+                  <Grid item xs={12} sm={6} md={4} key={episode._id}>
+                    <Card sx={{ my: 1, height: '100%', display: 'flex', flexDirection: 'columns' }} elevation={6} >
+                      <CardContent sx={{ flexGrow: 1 }}>
+                        <Typography sx={{ mb: 2 }}>Season: {episode.season} Episode: {episode.number}</Typography>
+                        <Typography sx={{ mb: 2 }}>Name: {episode.name}</Typography>
+                        <Typography sx={{ mb: 2 }}>Air Date: {episode.airdate}</Typography>
+                        <CardMedia component="img" height="100" image={episode.image.medium} />
+
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                )
+              }
+              )}
+            </Grid>
+          </> : <></>}
+
+          {showCast ? <>
+            <Grid container sx={{ my: 4 }} spacing={4}>
+              {cast.map((actor, index) => {
+                return (
+
+                  <Grid item xs={12} sm={6} md={4} key={actor.person._id}>
+                    <Card sx={{ my: 1, height: '100%', display: 'flex', flexDirection: 'columns' }} elevation={6} >
+                      <CardContent sx={{ flexGrow: 1 }}>
+                        <Typography sx={{ mb: 2 }}>Actor: {actor.person.name}</Typography>
+                        <Typography sx={{ mb: 2 }}>Character: {actor.character.name}</Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                )
+              }
+              )}
+            </Grid>
+          </> : <></>}
+
+
+
         </Box>
       </Box>
 
       <div>
-
-        {cast.map((person) => {
-          return (
-            <div>
-              <h4>Name: {person.name}</h4>
-              <img src={person.image_link}></img>
-              <Show person={person}></Show>
-              <Edit handleDelete={handleDelete} person={person} handleUpdate={handleUpdate}></Edit>
-
-            </div>
-          )
-        })}
 
         <Box component="footer"
           sx={{
