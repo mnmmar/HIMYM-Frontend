@@ -20,7 +20,7 @@ const App = () => {
 
   const getBlog = () => {
     axios
-      .get('https://serene-tundra-26070.herokuapp.com/api/blog')
+      .get('https://powerful-savannah-49295.herokuapp.com/api/blog')
       .then(
         (response) => setBlog(response.data),
         (err) => console.log(err)
@@ -29,7 +29,7 @@ const App = () => {
 
   const handleCreate = (addPerson) => {
     axios
-      .post('https://serene-tundra-26070.herokuapp.com/api/blog', addPerson)
+      .post('https://powerful-savannah-49295.herokuapp.com/api/blog', addPerson)
       .then((response) => {
         console.log(response)
         getBlog()
@@ -38,7 +38,7 @@ const App = () => {
 
   const handleDelete = (event) => {
     axios
-      .delete('https://serene-tundra-26070.herokuapp.com/api/blog/' + event.target.value)
+      .delete('https://powerful-savannah-49295.herokuapp.com/api/blog/' + event.target.value)
       .then((response) => {
         getBlog()
       })
@@ -46,7 +46,7 @@ const App = () => {
 
   const handleUpdate = (editPerson) => {
     axios
-      .put('https://serene-tundra-26070.herokuapp.com/api/blog/' + editPerson.id, editPerson)
+      .put('https://powerful-savannah-49295.herokuapp.com/api/blog/' + editPerson.id, editPerson)
       .then((response) => {
         getBlog()
       })
