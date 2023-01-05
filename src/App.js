@@ -3,11 +3,8 @@ import axios from 'axios';
 import './App.css';
 import Add from './components/Add';
 import Edit from './components/Edit';
-import Show from './components/Show';
 import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton, Toolbar, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import CardMedia from '@mui/material/CardMedia';
 
 
@@ -16,45 +13,42 @@ const drawerWidth = 240;
 
 //FROM MUI DOCS https://mui.com/material-ui/react-drawer/#full-height-navigation
 
-
-
-
-
 const App = () => {
 
-  let [cast, setCast] = useState([])
+  let [blog, setBlog] = useState([])
+  const [cast, setCast] = useState([])
 
-  const getComments = () => {
+  const getBlog = () => {
     axios
-      .get('https://serene-tundra-26070.herokuapp.com/api/cast')
+      .get('https://serene-tundra-26070.herokuapp.com/api/blog')
       .then(
-        (response) => setCast(response.data),
+        (response) => setBlog(response.data),
         (err) => console.log(err)
       )
   }
 
   const handleCreate = (addPerson) => {
     axios
-      .post('https://serene-tundra-26070.herokuapp.com/api/cast', addPerson)
+      .post('https://serene-tundra-26070.herokuapp.com/api/blog', addPerson)
       .then((response) => {
         console.log(response)
-        getCast()
+        getBlog()
       })
   }
 
   const handleDelete = (event) => {
     axios
-      .delete('https://serene-tundra-26070.herokuapp.com/api/cast/' + event.target.value)
+      .delete('https://serene-tundra-26070.herokuapp.com/api/blog/' + event.target.value)
       .then((response) => {
-        getCast()
+        getBlog()
       })
   }
 
   const handleUpdate = (editPerson) => {
     axios
-      .put('https://serene-tundra-26070.herokuapp.com/api/cast/' + editPerson.id, editPerson)
+      .put('https://serene-tundra-26070.herokuapp.com/api/blog/' + editPerson.id, editPerson)
       .then((response) => {
-        getCast()
+        getBlog()
       })
   }
 
@@ -63,7 +57,6 @@ const App = () => {
   const [showEpisodes, setShowEpisodes] = useState(true)
   const [showCast, setShowCast] = useState(false)
   const [showBlog, setShowBlog] = useState(false)
-
 
   const episodeVisibility = () => {
     setShowCast(false)
@@ -82,31 +75,26 @@ const App = () => {
     setShowEpisodes(false)
     setShowBlog(true)
   }
-  // const getEpisodes = (event) => {
-  //   event.preventDefault()
-  //   axios
-  //     .get('https://api.tvmaze.com/shows/171/episodes')
-  //     .then((response) => {
-  //       setEpisodes(response.data)
-  //     })
-  // }
-  const getCast = () => {
-    axios
-      .get('https:api.tvmaze.com/shows/171/cast')
-      .then((response) => { setCast(response.data) })
-  }
-
-  useEffect(() => {
-    getCast()
-
+  const getEpisodes = () => {
     axios
       .get('https://api.tvmaze.com/shows/171/episodes')
       .then((response) => {
         setEpisodes(response.data)
       })
+  }
+  const getCast = () => {
+    axios
+      .get('https:api.tvmaze.com/shows/171/cast')
+      .then((response) => {
+        setCast(response.data)
+      })
+  }
+
+  useEffect(() => {
+    getCast()
+    getEpisodes()
   }, [])
   //MUI THEMES
-
 
   return (
     <>
@@ -133,22 +121,18 @@ const App = () => {
           <Box sx={{ overflow: 'auto', m: 4 }}>
             <List>
               <Button variant={showEpisodes ? "contained" : "outlined"} onClick={episodeVisibility}>Episodes</Button>
-
               <Button variant={showCast ? "contained" : "outlined"} onClick={castVisibility}>Cast</Button>
-
             </List>
             <Divider />
             <List>
-
-            <Button variant={showBlog ? "contained" : "outlined"} onClick={blogVisibility}>Blog</Button>
-
+              <Button variant={showBlog ? "contained" : "outlined"} onClick={blogVisibility}>Blog</Button>
             </List>
           </Box>
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Toolbar />
 
-          <Add handleCreate={handleCreate}></Add>
+
 
           {showEpisodes ? <>
             <Grid container sx={{ my: 4 }} spacing={4}>
@@ -193,6 +177,27 @@ const App = () => {
             </Grid>
           </> : <></>}
 
+          {showBlog ? <>
+            <Add handleCreate={handleCreate}></Add>
+            <Grid>
+              {blog.map((comment, index) => {
+                return (
+                  <Card>
+                    <CardMedia component="img" height="100" image={comment.image} />
+                    <CardContent>
+                      <Typography>
+                        Name: {comment.name}
+                        Topic: {comment.topic}
+                        Image Link: {comment.image_link}
+                        Comment: {comment.post}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )
+              })}
+
+            </Grid>
+          </> : <></>}
 
 
         </Box>
