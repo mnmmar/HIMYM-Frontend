@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { FormGroup, Typography, TextField, Button, Grid, Paper } from '@mui/material';
 
 
-
-
-
 const Add = (props) => {
   let emptyBlog = { name: '', topic: '', image_link: '', post: '' }
   const [blog, setBlog] = useState(emptyBlog)
@@ -42,14 +39,6 @@ const Add = (props) => {
                 label="Topic"
                 variant="outlined"
                 value={blog.topic} /><br />
-              <TextField sx={{ width: 700, m: 1, p: 1 }}
-                onChange={handleChange}
-                multiline maxRows={2}
-                id="outlined-multiline-flexible"
-                name="image"
-                label="Image Link"
-                variant="outlined"
-                value={blog.image_link} /><br />
               <TextField
                 sx={{ width: 700, m: 1, p: 1 }}
                 rows={4}
@@ -70,75 +59,6 @@ const Add = (props) => {
           </FormGroup>
         </Paper>
       </Grid>
-{/* 
-      <details>
-        <summary>Add A New Post!</summary>
-
-        <form onSubmit={handleSubmit}>
-
-          <label>Name: </label>
-          <br />
-          <input
-            type="text"
-            name="name"
-            value={blog.name}
-            onChange={handleChange}
-          />
-          <br />
-
-          <label>Age: </label>
-          <br />
-          <input
-            type="number"
-            name="age"
-            value={blog.age}
-            onChange={handleChange}
-          />
-          <br />
-
-          <label>First Appearance: </label>
-          <br />
-          <input
-            type="number"
-            name="first_episode"
-            value={blog.first_episode}
-            onChange={handleChange}
-          />
-          <br />
-
-          <label>Status: </label>
-          <br />
-          <input
-            type="text"
-            name="status"
-            value={blog.status}
-            onChange={handleChange}
-          />
-          <br />
-
-          <label>Relationship Status: </label>
-          <br />
-          <input
-            type="text"
-            name="relationship_status"
-            value={blog.relationship_status}
-            onChange={handleChange}
-          />
-          <br />
-
-          <label>Image Link: </label>
-          <br />
-          <input
-            type="text"
-            name="image_link"
-            value={blog.image_link}
-            onChange={handleChange}
-          />
-          <br />
-
-          <input type="submit" />
-        </form>
-      </details> */}
 
     </>
   )
