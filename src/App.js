@@ -62,16 +62,25 @@ const App = () => {
 
   const [showEpisodes, setShowEpisodes] = useState(true)
   const [showCast, setShowCast] = useState(false)
+  const [showBlog, setShowBlog] = useState(false)
 
 
   const episodeVisibility = () => {
     setShowCast(false)
     setShowEpisodes(true)
+    setShowBlog(false)
   }
 
   const castVisibility = () => {
     setShowCast(true)
     setShowEpisodes(false)
+    setShowBlog(false)
+  }
+
+  const blogVisibility = () => {
+    setShowCast(false)
+    setShowEpisodes(false)
+    setShowBlog(true)
   }
   // const getEpisodes = (event) => {
   //   event.preventDefault()
@@ -129,6 +138,11 @@ const App = () => {
 
             </List>
             <Divider />
+            <List>
+
+            <Button variant={showBlog ? "contained" : "outlined"} onClick={blogVisibility}>Blog</Button>
+
+            </List>
           </Box>
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
