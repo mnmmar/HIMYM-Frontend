@@ -41,6 +41,7 @@ export default function EditModal({ open, onClose, onSubmit, onDelete, editBlog 
             .delete('https://powerful-savannah-49295.herokuapp.com/api/blog/' + event.target.value)
             .then((response) => {
                 setBlog()
+                onDelete()
             })
     }
 
@@ -59,7 +60,7 @@ export default function EditModal({ open, onClose, onSubmit, onDelete, editBlog 
         >
             <Box sx={modalstyle}>
                 <FormGroup>
-                    <Typography sx={{ mt: 2, p: 2 }} variant="h5"><strong>Discuss HIMYM with Others!</strong></Typography>
+                    <Typography sx={{ mt: 2, p: 2 }} variant="h5"><strong>Edit your Post</strong></Typography>
                     <form onSubmit={handleSubmit}>
                         <TextField
                             sx={{ m: 1, p: 1, width: 300 }}

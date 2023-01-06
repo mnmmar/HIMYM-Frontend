@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 import Add from './components/Add';
 import EditModal from './components/EditModal';
-import { AppBar, Button, Modal, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton, Toolbar, Typography, CardActions } from '@mui/material';
+import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, Toolbar, Typography, CardActions } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import CardMedia from '@mui/material/CardMedia';
 
@@ -128,16 +128,18 @@ const App = () => {
             [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
           }}
         >
+
+          <Toolbar />
           <Toolbar />
 
           <Box sx={{ overflow: 'auto', m: 4 }}>
             <List>
-              <Button variant={showEpisodes ? "contained" : "outlined"} onClick={episodeVisibility}>Episodes</Button>
-              <Button variant={showCast ? "contained" : "outlined"} onClick={castVisibility}>Cast</Button>
+              <Button sx={{ m: 3 }} variant={showEpisodes ? "contained" : "outlined"} onClick={episodeVisibility}>Episodes</Button>
+              <Button sx={{ m: 3 }} variant={showCast ? "contained" : "outlined"} onClick={castVisibility}>Cast</Button>
             </List>
             <Divider />
             <List>
-              <Button variant={showBlog ? "contained" : "outlined"} onClick={blogVisibility}>Blog</Button>
+              <Button sx={{ m: 3 }} variant={showBlog ? "contained" : "outlined"} onClick={blogVisibility}>Blog</Button>
             </List>
           </Box>
         </Drawer>
@@ -195,8 +197,8 @@ const App = () => {
               {blog.map((comment, index) => {
                 return (
                   <Grid item xs={12} key={comment._id}>
-                    <Card elevation={6} sx={{borderRadius: '60px'} }>
-                  
+                    <Card elevation={6} sx={{ borderRadius: '60px' }}>
+
                       <CardContent align="left">
                         <Typography >Name: {comment.name}</Typography>
                         <Typography> Topic: {comment.topic}</Typography>
