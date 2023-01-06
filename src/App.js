@@ -128,18 +128,18 @@ const App = () => {
             [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
           }}
         >
-          
+
           <Toolbar />
           <Toolbar />
 
           <Box sx={{ overflow: 'auto', m: 4 }}>
             <List>
-              <Button sx={{m:3}} variant={showEpisodes ? "contained" : "outlined"} onClick={episodeVisibility}>Episodes</Button>
-              <Button sx={{m:3}} variant={showCast ? "contained" : "outlined"} onClick={castVisibility}>Cast</Button>
+              <Button sx={{ m: 3 }} variant={showEpisodes ? "contained" : "outlined"} onClick={episodeVisibility}>Episodes</Button>
+              <Button sx={{ m: 3 }} variant={showCast ? "contained" : "outlined"} onClick={castVisibility}>Cast</Button>
             </List>
             <Divider />
             <List>
-              <Button sx={{m:3}} variant={showBlog ? "contained" : "outlined"} onClick={blogVisibility}>Blog</Button>
+              <Button sx={{ m: 3 }} variant={showBlog ? "contained" : "outlined"} onClick={blogVisibility}>Blog</Button>
             </List>
           </Box>
         </Drawer>
@@ -197,8 +197,8 @@ const App = () => {
               {blog.map((comment, index) => {
                 return (
                   <Grid item xs={12} key={comment._id}>
-                    <Card elevation={6} sx={{borderRadius: '60px'} }>
-                  
+                    <Card elevation={6} sx={{ borderRadius: '60px' }}>
+
                       <CardContent align="left">
                         <Typography >Name: {comment.name}</Typography>
                         <Typography> Topic: {comment.topic}</Typography>
