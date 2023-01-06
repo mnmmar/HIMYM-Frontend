@@ -195,12 +195,10 @@ const App = () => {
                 return (
                   <Grid item xs={12} key={blogEntry._id}>
                     <Card elevation={6} sx={{ borderRadius: '60px' }}>
-
                       <CardContent align="left">
                         <Typography >Name: {blogEntry.name}</Typography>
                         <Typography> Topic: {blogEntry.topic}</Typography>
                         <Typography>Comment: {blogEntry.post}</Typography>
-                        <CardMedia component="img" height="100" sx={{ maxWidth: 180 }} image={actor.character.image.medium} />
                       </CardContent>
                       <CardActions>
                         <Button size="small" onClick={editBlog(blogEntry)}>Edit</Button>
