@@ -24,7 +24,7 @@ const App = () => {
   const [showModal, setShowModal] = useState(false)
   const [blogEditItem, setBlogItem] = useState({})
 
-  const editBlog = (blogItem) => (event) => {
+  const editBlog = (blogItem) => () => {
     setShowModal(true)
     setBlogItem(blogItem)
   }
@@ -47,11 +47,12 @@ const App = () => {
       })
   }
 
-  const handleDelete = (event) => {
+  const handleDelete = (blogId) => {
     axios
-      .delete('https://powerful-savannah-49295.herokuapp.com/api/blog/' + event.target.value)
+      .delete('https://powerful-savannah-49295.herokuapp.com/api/blog/' + blogId)
       .then((response) => {
         getBlog()
+        setShowModal(false)
       })
   }
 
@@ -60,6 +61,7 @@ const App = () => {
       .put('https://powerful-savannah-49295.herokuapp.com/api/blog/' + editBlog.id, editBlog)
       .then((response) => {
         getBlog()
+        setShowModal(false)
       })
   }
 
@@ -194,18 +196,18 @@ const App = () => {
           {showBlog ? <>
             <Add handleCreate={handleCreate}></Add>
             <Grid container>
-              {blog.map((comment, index) => {
+              {blog.map((blogEntry, index) => {
                 return (
-                  <Grid item xs={12} key={comment._id}>
+                  <Grid item xs={12} key={blogEntry._id}>
                     <Card elevation={6} sx={{ borderRadius: '60px' }}>
 
                       <CardContent align="left">
-                        <Typography >Name: {comment.name}</Typography>
-                        <Typography> Topic: {comment.topic}</Typography>
-                        <Typography>Comment: {comment.post}</Typography>
+                        <Typography >Name: {blogEntry.name}</Typography>
+                        <Typography> Topic: {blogEntry.topic}</Typography>
+                        <Typography>Comment: {blogEntry.post}</Typography>
                       </CardContent>
                       <CardActions>
-                        <Button size="small" onClick={editBlog(comment)}>Edit</Button>
+                        <Button size="small" onClick={editBlog(blogEntry)}>Edit</Button>
 
                       </CardActions>
                     </Card>
@@ -218,7 +220,7 @@ const App = () => {
 
           <EditModal open={showModal}
             onClose={() => { setShowModal(false) }}
-            blog={blogEditItem}
+            initialBlog={blogEditItem}
             onDelete={handleDelete}
             onSubmit={handleUpdate} />
 
