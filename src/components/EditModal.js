@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 
-import { Box, Button, FormGroup, Modal, TextField, Typography } from '@mui/material';
+import { Box, Button, FormGroup, Paper, Modal, TextField, Typography } from '@mui/material';
 
 const modalstyle = {
     position: 'absolute',
@@ -61,7 +61,7 @@ export default function EditModal({ open, onClose, onSubmit, onDelete, initialBl
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={modalstyle}>
+            <Box align="left" sx={modalstyle}>
                 <FormGroup>
                     <Typography sx={{ mt: 2, p: 2 }} variant="h5"><strong>Edit your Post</strong></Typography>
                     <form onSubmit={handleSubmit}>
