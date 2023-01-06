@@ -173,12 +173,12 @@ const App = () => {
               {cast.map((actor, index) => {
                 return (
 
-                  <Grid item xs={12} sm={6} md={4}  key={actor.person._id}>
+                  <Grid item xs={12} sm={6} md={4} key={actor.person._id}>
                     <Card sx={{ my: 1, height: '100%', width: 200, display: 'flex', flexDirection: 'columns' }} elevation={6} >
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography sx={{ mb: 2 }}>Character: {actor.character.name}</Typography>
                         <Typography sx={{ mb: 2 }}>Actor: {actor.person.name}</Typography>
-                        <CardMedia component="img" height="100" sx={{ maxWidth: 180}} image={actor.character.image.medium} />
+                        <CardMedia component="img" height="100" sx={{ maxWidth: 180 }} image={actor.character.image.medium} />
                       </CardContent>
                     </Card>
                   </Grid>
@@ -200,10 +200,10 @@ const App = () => {
                         <Typography >Name: {blogEntry.name}</Typography>
                         <Typography> Topic: {blogEntry.topic}</Typography>
                         <Typography>Comment: {blogEntry.post}</Typography>
+                        <CardMedia component="img" height="100" sx={{ maxWidth: 180 }} image={actor.character.image.medium} />
                       </CardContent>
                       <CardActions>
                         <Button size="small" onClick={editBlog(blogEntry)}>Edit</Button>
-
                       </CardActions>
                     </Card>
                   </Grid>
