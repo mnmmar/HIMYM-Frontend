@@ -7,10 +7,6 @@ import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawe
 import CssBaseline from '@mui/material/CssBaseline';
 import CardMedia from '@mui/material/CardMedia';
 
-
-
-
-// const axios = axios.create({ baseURL: 'https://serene-tundra-26070.herokuapp.com/api' })
 const drawerWidth = 240;
 
 const App = () => {
@@ -130,7 +126,7 @@ const App = () => {
             [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
           }}
         >
-
+          {/* These two are for spacing purposes, basically empty div's */}
           <Toolbar />
           <Toolbar />
 
@@ -160,11 +156,8 @@ const App = () => {
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography sx={{ mb: 2 }}>Season: {episode.season} Episode: {episode.number}</Typography>
                         <Typography sx={{ mb: 2 }}>Name: {episode.name}</Typography>
-
                         <Typography sx={{ mb: 2 }}>Air Date: {episode.airdate}</Typography>
                         <CardMedia component="img" height="100" image={episode.image.medium} />
-
-
                       </CardContent>
                     </Card>
                   </Grid>
@@ -226,8 +219,6 @@ const App = () => {
 
         </Box>
       </Box>
-
-
 
       <Box component="footer"
         sx={{

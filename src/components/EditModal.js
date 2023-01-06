@@ -29,23 +29,8 @@ export default function EditModal({ open, onClose, onSubmit, onDelete, initialBl
         onSubmit(blog)
     }
 
-    // const handleUpdate = (editBlog) => {
-    //     console.log(editBlog)
-    //     axios
-    //         .put('https://powerful-savannah-49295.herokuapp.com/api/blog/' + editBlog.id, editBlog)
-    //         .then((response) => {
-    //             setBlog()
-    //         })
-    // }
-
     const handleDelete = (event) => {
         onDelete(blog.id)
-        // axios
-        //     .delete('https://powerful-savannah-49295.herokuapp.com/api/blog/' + event.target.value)
-        //     .then((response) => {
-        //         setBlog()
-        //         onDelete()
-        //     })
     }
 
     useEffect(() => {
