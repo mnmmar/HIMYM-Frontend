@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 import { Box, Button, FormGroup, Modal, TextField, Typography } from '@mui/material';
 
@@ -15,7 +15,7 @@ const modalstyle = {
     p: 2,
 };
 
-export default function EditModal({ open, onClose, onSubmit, onDelete, editBlog }) {
+export default function EditModal({ open, onClose, onSubmit, onDelete, initialBlog }) {
 
     const [blog, setBlog] = useState({})
 
@@ -25,28 +25,32 @@ export default function EditModal({ open, onClose, onSubmit, onDelete, editBlog 
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        handleUpdate(blog)
+        console.log(blog)
+        onSubmit(blog)
     }
 
-    const handleUpdate = (editBlog) => {
-        axios
-            .put('https://powerful-savannah-49295.herokuapp.com/api/blog/' + editBlog.id, editBlog)
-            .then((response) => {
-                setBlog()
-            })
-    }
+    // const handleUpdate = (editBlog) => {
+    //     console.log(editBlog)
+    //     axios
+    //         .put('https://powerful-savannah-49295.herokuapp.com/api/blog/' + editBlog.id, editBlog)
+    //         .then((response) => {
+    //             setBlog()
+    //         })
+    // }
 
     const handleDelete = (event) => {
-        axios
-            .delete('https://powerful-savannah-49295.herokuapp.com/api/blog/' + event.target.value)
-            .then((response) => {
-                setBlog()
-            })
+        onDelete(blog.id)
+        // axios
+        //     .delete('https://powerful-savannah-49295.herokuapp.com/api/blog/' + event.target.value)
+        //     .then((response) => {
+        //         setBlog()
+        //         onDelete()
+        //     })
     }
 
     useEffect(() => {
-
-    }, [blog])
+        setBlog(initialBlog)
+    }, [initialBlog])
 
 
     return (
@@ -59,7 +63,7 @@ export default function EditModal({ open, onClose, onSubmit, onDelete, editBlog 
         >
             <Box sx={modalstyle}>
                 <FormGroup>
-                    <Typography sx={{ mt: 2, p: 2 }} variant="h5"><strong>Discuss HIMYM with Others!</strong></Typography>
+                    <Typography sx={{ mt: 2, p: 2 }} variant="h5"><strong>Edit your Post</strong></Typography>
                     <form onSubmit={handleSubmit}>
                         <TextField
                             sx={{ m: 1, p: 1, width: 300 }}
