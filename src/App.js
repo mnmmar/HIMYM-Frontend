@@ -8,6 +8,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import CardMedia from '@mui/material/CardMedia';
 
 
+
+
 // const axios = axios.create({ baseURL: 'https://serene-tundra-26070.herokuapp.com/api' })
 const drawerWidth = 240;
 
@@ -195,7 +197,8 @@ const App = () => {
               {blog.map((comment, index) => {
                 return (
                   <Grid item xs={12} key={comment._id}>
-                    <Card elevation={6}>
+                    <Card elevation={6} sx={{borderRadius: '60px'} }>
+                  
                       <CardContent align="left">
                         <Typography >Name: {comment.name}</Typography>
                         <Typography> Topic: {comment.topic}</Typography>
