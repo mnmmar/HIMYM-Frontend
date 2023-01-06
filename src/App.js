@@ -51,6 +51,7 @@ const App = () => {
     axios
       .delete('https://powerful-savannah-49295.herokuapp.com/api/blog/' + event.target.value)
       .then((response) => {
+
         getBlog()
       })
   }
@@ -177,11 +178,12 @@ const App = () => {
               {cast.map((actor, index) => {
                 return (
 
-                  <Grid item xs={12} sm={6} md={4} key={actor.person._id}>
-                    <Card sx={{ my: 1, height: '100%', display: 'flex', flexDirection: 'columns' }} elevation={6} >
+                  <Grid item xs={12} sm={6} md={4}  key={actor.person._id}>
+                    <Card sx={{ my: 1, height: '100%', width: 200, display: 'flex', flexDirection: 'columns' }} elevation={6} >
                       <CardContent sx={{ flexGrow: 1 }}>
-                        <Typography sx={{ mb: 2 }}>Actor: {actor.person.name}</Typography>
                         <Typography sx={{ mb: 2 }}>Character: {actor.character.name}</Typography>
+                        <Typography sx={{ mb: 2 }}>Actor: {actor.person.name}</Typography>
+                        <CardMedia component="img" height="100" sx={{ maxWidth: 180}} image={actor.character.image.medium} />
                       </CardContent>
                     </Card>
                   </Grid>
