@@ -3,12 +3,8 @@ import axios from 'axios';
 import './App.css';
 import Add from './components/Add';
 import EditModal from './components/EditModal';
-
 import EpisodesModal from './components/EpisodesModal';
-import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, Toolbar, Typography, CardActions } from '@mui/material';
-
 import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, Toolbar, Stack, Typography, CardActions } from '@mui/material';
-
 import CssBaseline from '@mui/material/CssBaseline';
 import CardMedia from '@mui/material/CardMedia';
 
