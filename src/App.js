@@ -248,6 +248,7 @@ const App = () => {
             </Stack>
           </> : <></>}
 
+
           <EditModal open={showModal}
             onClose={() => { setShowModal(false) }}
             initialBlog={blogEditItem}
