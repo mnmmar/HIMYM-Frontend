@@ -3,9 +3,10 @@ import axios from 'axios';
 import './App.css';
 import Add from './components/Add';
 import EditModal from './components/EditModal';
-import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, Toolbar, Typography, CardActions } from '@mui/material';
+import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, Toolbar, Stack, Typography, CardActions } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import CardMedia from '@mui/material/CardMedia';
+
 
 const drawerWidth = 240;
 
@@ -190,7 +191,7 @@ const App = () => {
 
           {showBlog ? <>
             <Add handleCreate={handleCreate}></Add>
-            <Grid container>
+            <Stack container direction="column-reverse">
               {blog.map((blogEntry, index) => {
                 return (
                   <Grid item xs={12} key={blogEntry._id}>
@@ -208,7 +209,7 @@ const App = () => {
                 )
               })}
 
-            </Grid>
+            </Stack>
           </> : <></>}
 
           <EditModal open={showModal}
