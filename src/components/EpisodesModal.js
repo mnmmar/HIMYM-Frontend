@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Rating from '@mui/material/Rating';
 // import axios from 'axios';
-import { Box, Button, FormGroup, Paper, Modal, TextField, Typography } from '@mui/material';
+import { Box, Button, FormGroup, Paper, Modal, TextField, Typography, Card } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 
 
@@ -29,16 +30,17 @@ export default function EpisodesModal({ open, onClose, episodeDetails }) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={modalstyle}>
-                    <CardMedia component="img" height="100" image={episodeDetails.image} />
-                    <Typography sx={{ mb: 2 }}>Season:{episodeDetails.season}</Typography>
-                    <Typography sx={{ mt: 2 }}> Episode:{episodeDetails.number}</Typography>
-                    <Typography sx={{ mt: 2 }}> Name:{episodeDetails.name}</Typography>
-                    <Typography sx={{ mb: 2 }}>Air Date: {episodeDetails.airdate}</Typography>
-                    <Typography sx={{ mb: 2 }}>Summary: {episodeDetails.summary}</Typography>
-
-
+                    <Card>
+                        <CardMedia height="140" image={episodeDetails.image} />
+                        <Typography sx={{ mb: 2 }}>Season:{episodeDetails.season}</Typography>
+                        <Typography sx={{ mt: 2 }}> Episode:{episodeDetails.number}</Typography>
+                        <Typography sx={{ mt: 2 }}> Name:{episodeDetails.name}</Typography>
+                        <Typography sx={{ mb: 2 }}>Air Date: {episodeDetails.airdate}</Typography>
+                        <Typography sx={{ mb: 2 }}>Summary: {episodeDetails.summary}</Typography>
+                        <Rating value={episodeDetails.rating} max={10} precision={0.5} readOnly />
+                    </Card>
                 </Box>
-            </Modal>
+            </Modal >
         </>
     );
 }
