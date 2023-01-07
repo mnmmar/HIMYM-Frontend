@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import Add from './components/Add';
 import EditModal from './components/EditModal';
+import EpisodesModal from './components/EpisodesModal';
 import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, Toolbar, Typography, CardActions } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import CardMedia from '@mui/material/CardMedia';
@@ -13,6 +14,19 @@ const App = () => {
 
   let [blog, setBlog] = useState([])
   const [cast, setCast] = useState([])
+  const [episodeDetails, setEpisodeDetails] = useState({})
+
+
+  //---------
+  //EPISODES Modal
+  //----------
+
+  const [showEpisodeModal, setEpisodeModal] = useState(false)
+
+  const showEpiModal = () => {
+    setEpisodeModal(true)
+  }
+
 
   //---------
   //EDIT Modal
@@ -33,6 +47,8 @@ const App = () => {
         (err) => console.log(err)
       )
   }
+
+
 
   const handleCreate = (addPerson) => {
     axios
@@ -100,6 +116,18 @@ const App = () => {
       })
   }
 
+  const getDetails = (episodeId) => {
+    console.log(episodeId)
+    axios
+      .get('https://api.tvmaze.com/episodes/' + episodeId)
+      .then((response) => {
+        setEpisodeDetails(response.data)
+
+      })
+    showEpiModal()
+    setEpisodeModal(true)
+  }
+
   useEffect(() => {
     getCast()
     getEpisodes()
@@ -153,32 +181,44 @@ const App = () => {
                 return (
 
                   <Grid item xs={12} sm={6} md={4} key={episode._id}>
-                    <Card sx={{ my: 1, height: '100%', display: 'flex', flexDirection: 'columns' }} elevation={6} >
+                    <Card sx={{ my: 1, height: '100%', flexDirection: 'columns' }} elevation={6} >
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography sx={{ mb: 2 }}>Season: {episode.season} Episode: {episode.number}</Typography>
                         <Typography sx={{ mb: 2 }}>Name: {episode.name}</Typography>
-                        <Typography sx={{ mb: 2 }}>Air Date: {episode.airdate}</Typography>
                         <CardMedia component="img" height="100" image={episode.image.medium} />
                       </CardContent>
+
+                      <CardActions>
+                        <Button size="small" onClick={() => { showEpiModal(); getDetails(episode.id) }} >Details</Button>
+                      </CardActions>
+
                     </Card>
+
                   </Grid>
+
                 )
               }
               )}
             </Grid>
-          </> : <></>}
+          </> : <></>
+          }
+          <EpisodesModal
+            episodeDetails={episodeDetails}
+            open={showEpisodeModal} // false
+            onClose={() => { setEpisodeModal(false) }} />
+
 
           {showCast ? <>
             <Grid container sx={{ my: 4 }} spacing={4}>
               {cast.map((actor, index) => {
                 return (
 
-                  <Grid item xs={12} sm={6} md={4}  key={actor.person._id}>
+                  <Grid item xs={12} sm={6} md={4} key={actor.person._id}>
                     <Card sx={{ my: 1, height: '100%', width: 200, display: 'flex', flexDirection: 'columns' }} elevation={6} >
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography sx={{ mb: 2 }}>Character: {actor.character.name}</Typography>
                         <Typography sx={{ mb: 2 }}>Actor: {actor.person.name}</Typography>
-                        <CardMedia component="img" height="100" sx={{ maxWidth: 180}} image={actor.character.image.medium} />
+                        <CardMedia component="img" height="100" sx={{ maxWidth: 180 }} image={actor.character.image.medium} />
                       </CardContent>
                     </Card>
                   </Grid>
