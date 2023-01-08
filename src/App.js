@@ -4,7 +4,7 @@ import './App.css';
 import Add from './components/Add';
 import EditModal from './components/EditModal';
 import EpisodesModal from './components/EpisodesModal';
-import { AppBar, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, Toolbar, Stack, Typography, CardActions } from '@mui/material';
+import { AppBar, Rating, Button, Box, Card, CardContent, Grid, Container, Divider, Drawer, List, Toolbar, Stack, Typography, CardActions } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import CardMedia from '@mui/material/CardMedia';
 
@@ -187,6 +187,9 @@ const App = () => {
                         <Typography sx={{ mb: 2 }}>Season: {episode.season} Episode: {episode.number}</Typography>
                         <Typography sx={{ mb: 2 }}>Name: {episode.name}</Typography>
                         <CardMedia component="img" height="100" image={episode.image.medium} />
+                        <Rating value={episode.rating.average} readOnly max={10} precision={0.5} />
+
+                        <Typography sx={{ mb: 2 }}>Rating: {episode.rating.average}</Typography>
                       </CardContent>
                       <CardActions>
                         <Button size="small" onClick={() => { showEpiModal(); getDetails(episode.id) }} >Details</Button>
