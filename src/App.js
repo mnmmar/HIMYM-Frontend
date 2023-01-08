@@ -187,7 +187,7 @@ const App = () => {
                         <Typography sx={{ mb: 2 }}>Season: {episode.season} Episode: {episode.number}</Typography>
                         <Typography sx={{ mb: 2 }}>Name: {episode.name}</Typography>
                         <CardMedia component="img" height="100" image={episode.image.medium} />
-                        <Rating value={episode.rating.average} readOnly max={10} precision={0.5} />
+                        <Rating value={episode.rating.average} size="small" readOnly max={10} precision={0.5} />
 
                         <Typography sx={{ mb: 2 }}>Rating: {episode.rating.average}</Typography>
                       </CardContent>
@@ -202,11 +202,11 @@ const App = () => {
             </Grid>
           </> : <></>
           }
+
           <EpisodesModal
             episodeDetails={episodeDetails}
             open={showEpisodeModal} // false
             onClose={() => { setEpisodeModal(false) }} />
-
 
           {showCast ? <>
             <Grid container sx={{ my: 4 }} spacing={4}>
@@ -247,10 +247,8 @@ const App = () => {
                   </Grid>
                 )
               })}
-
             </Stack>
           </> : <></>}
-
 
           <EditModal open={showModal}
             onClose={() => { setShowModal(false) }}
