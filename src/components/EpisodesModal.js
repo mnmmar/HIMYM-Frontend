@@ -31,7 +31,7 @@ export default function EpisodesModal({ open, onClose, episodeDetails }) {
                         <Typography > Episode:{episodeDetails.number}</Typography>
                         <Typography sx={{ m: 2 }}> Name:{episodeDetails.name}</Typography>
                         <Typography>Air Date: {episodeDetails.airdate}</Typography>
-                        <Rating value={episodeDetails.rating?.average} size="small" readOnly max={10} precision={0.5} />
+                        <Rating value={episodeDetails.rating?.average} size="small" readOnly max={10} precision={0.1} />
                         <Typography sx={{ mb: 2 }}>Summary: {episodeDetails.summary}</Typography>
                     </Card>
                 </Box>

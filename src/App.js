@@ -187,7 +187,7 @@ const App = () => {
                         <Typography sx={{ mb: 2 }}>Season: {episode.season} Episode: {episode.number}</Typography>
                         <Typography sx={{ mb: 2 }}>Name: {episode.name}</Typography>
                         <CardMedia component="img" height="100" image={episode.image.medium} />
-                        <Rating value={episode.rating.average} size="small" readOnly max={10} precision={0.5} />
+                        <Rating value={episode.rating.average} size="small" readOnly max={10} precision={0.1} />
 
                         <Typography sx={{ mb: 2 }}>Rating: {episode.rating.average}</Typography>
                       </CardContent>
