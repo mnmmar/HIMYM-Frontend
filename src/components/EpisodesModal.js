@@ -16,7 +16,6 @@ const modalstyle = {
 
 export default function EpisodesModal({ open, onClose, episodeDetails }) {
 
-
     return (
         <>
             <Modal
@@ -27,16 +26,13 @@ export default function EpisodesModal({ open, onClose, episodeDetails }) {
             >
                 <Box sx={modalstyle}>
                     <Card>
-                        <CardMedia component="img" height="100" image={episodeDetails.image} />
-                        <Typography sx={{ mb: 2 }}>Season:{episodeDetails.season}</Typography>
-                        <Typography sx={{ mt: 2 }}> Episode:{episodeDetails.number}</Typography>
-                        <Typography sx={{ mt: 2 }}> Name:{episodeDetails.name}</Typography>
-                        <Typography sx={{ mb: 2 }}>Air Date: {episodeDetails.airdate}</Typography>
+                        <CardMedia component="img" height="100" image={episodeDetails?.image?.medium} />
+                        <Typography sx={{ m: 2 }}>Season:{episodeDetails.season}</Typography>
+                        <Typography > Episode:{episodeDetails.number}</Typography>
+                        <Typography sx={{ m: 2 }}> Name:{episodeDetails.name}</Typography>
+                        <Typography>Air Date: {episodeDetails.airdate}</Typography>
+                        <Rating value={episodeDetails.rating?.average} size="small" readOnly max={10} precision={0.5} />
                         <Typography sx={{ mb: 2 }}>Summary: {episodeDetails.summary}</Typography>
-
-                        {/* <Rating value={episodeDetails.rating} readOnly max={10} precision={0.5} /> */}
-                        {/* <Typography sx={{ mb: 2 }}>Rating: {episodeDetails.rating}</Typography> */}
-
                     </Card>
                 </Box>
             </Modal>

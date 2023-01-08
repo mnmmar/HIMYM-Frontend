@@ -59,7 +59,6 @@ const Add = (props) => {
           </FormGroup>
         </Paper>
       </Grid>
-
     </>
   )
 }
