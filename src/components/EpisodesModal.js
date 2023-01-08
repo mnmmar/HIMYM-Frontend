@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-// import axios from 'axios';
-import { Box, Button, FormGroup, Paper, Modal, TextField, Typography, Rating, Card } from '@mui/material';
+import React from 'react';
+import { Box, Modal, Typography, Rating, Card } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
-
 
 const modalstyle = {
     position: 'absolute',
