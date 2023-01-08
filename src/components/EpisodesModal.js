@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-// import axios from 'axios';
-import { Box, Button, FormGroup, Paper, Modal, TextField, Typography } from '@mui/material';
+import React from 'react';
+import { Box, Modal, Typography, Rating, Card } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
-
 
 const modalstyle = {
     position: 'absolute',
@@ -19,7 +16,6 @@ const modalstyle = {
 
 export default function EpisodesModal({ open, onClose, episodeDetails }) {
 
-
     return (
         <>
             <Modal
@@ -29,14 +25,15 @@ export default function EpisodesModal({ open, onClose, episodeDetails }) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={modalstyle}>
-                    <CardMedia component="img" height="100" image={episodeDetails.image} />
-                    <Typography sx={{ mb: 2 }}>Season:{episodeDetails.season}</Typography>
-                    <Typography sx={{ mt: 2 }}> Episode:{episodeDetails.number}</Typography>
-                    <Typography sx={{ mt: 2 }}> Name:{episodeDetails.name}</Typography>
-                    <Typography sx={{ mb: 2 }}>Air Date: {episodeDetails.airdate}</Typography>
-                    <Typography sx={{ mb: 2 }}>Summary: {episodeDetails.summary}</Typography>
-
-
+                    <Card>
+                        <CardMedia component="img" height="100" image={episodeDetails?.image?.medium} />
+                        <Typography sx={{ m: 2 }}>Season:{episodeDetails.season}</Typography>
+                        <Typography > Episode:{episodeDetails.number}</Typography>
+                        <Typography sx={{ m: 2 }}> Name:{episodeDetails.name}</Typography>
+                        <Typography>Air Date: {episodeDetails.airdate}</Typography>
+                        <Rating value={episodeDetails.rating?.average} size="small" readOnly max={10} precision={0.5} />
+                        <Typography sx={{ mb: 2 }}>Summary: {episodeDetails.summary}</Typography>
+                    </Card>
                 </Box>
             </Modal>
         </>
