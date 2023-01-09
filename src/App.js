@@ -40,6 +40,10 @@ const App = () => {
     setBlogItem(blogItem)
   }
 
+  // --------------------
+  // Our API Calls
+  // --------------------
+
   const getBlog = () => {
     axios
       .get('https://powerful-savannah-49295.herokuapp.com/api/blog')
@@ -81,6 +85,9 @@ const App = () => {
 
   const [episodes, setEpisodes] = useState([])
 
+  // --------------------
+  // Setting parts to show or hide depending on button clicked
+  // --------------------
   const [showEpisodes, setShowEpisodes] = useState(true)
   const [showCast, setShowCast] = useState(false)
   const [showBlog, setShowBlog] = useState(false)
@@ -102,6 +109,9 @@ const App = () => {
     setShowEpisodes(false)
     setShowBlog(true)
   }
+  // --------------------
+  // 3rd Party API Calls
+  // --------------------
   const getEpisodes = () => {
     axios
       .get('https://api.tvmaze.com/shows/171/episodes')
@@ -134,10 +144,10 @@ const App = () => {
     getEpisodes()
     getBlog()
   }, [])
-  //MUI THEMES
 
   return (
     <>
+      {/* Header and Side Menu */}
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
@@ -174,8 +184,7 @@ const App = () => {
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Toolbar />
 
-
-
+          {/* Episode Cards, plus Modal for Episodes, from 3rd party API */}
           {showEpisodes ? <>
             <Grid container sx={{ my: 4 }} spacing={4}>
               {episodes.map((episode, index) => {
@@ -208,6 +217,7 @@ const App = () => {
             open={showEpisodeModal} // false
             onClose={() => { setEpisodeModal(false) }} />
 
+          {/* Cast Cards from 3rd party API */}
           {showCast ? <>
             <Grid container sx={{ my: 4 }} spacing={4}>
               {cast.map((actor, index) => {
@@ -227,7 +237,8 @@ const App = () => {
               )}
             </Grid>
           </> : <></>}
-
+          {/* Blog Post Form and list of blog posts that shows newest first */}
+          {/* Modal for editing and deleting posts */}
           {showBlog ? <>
             <Add handleCreate={handleCreate}></Add>
             <Stack container direction="column-reverse">
@@ -258,7 +269,7 @@ const App = () => {
 
         </Box>
       </Box>
-
+      {/* Footer Section */}
       <Box component="footer"
         sx={{
           py: 3, px: 2, mt: 'auto',
