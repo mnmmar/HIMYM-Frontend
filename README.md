@@ -24,6 +24,10 @@ Unsolved Problems
 
 We ended up not having time for authentification, which was one of our original stretch goals. After we added the blog, we decided we didn't have enough time for it since it was going to take us over the span of multiple days in order to add user login and tie it to each blog post so that only that certain user could edit and/or delete it. 
 
+The ratings portion was easy to implement but has given us some unsolved problems and perpetual headaches. The ratings in the episode card shows, and fills in down to 1/10 of a percent, but the partial star shows above the rest, not inline. This has something to do with position and centering of parent elements, but we weren't able to unwind the issue
+
+Additionally the ratings and the media picture in the modal, that was difficult to get in, it broke every time until the very end. With a safe navigator (?) we were able to access the api without breaking the whole site, except the ratings still isnt filling out. 
+
 Resource Links
 
 * https://mui.com/ 
